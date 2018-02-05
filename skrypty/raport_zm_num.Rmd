@@ -1,0 +1,74 @@
+---
+params:
+   dynamictitle: "Raport"
+   dynamicdate: !r Sys.Date()
+title: "`r params$dynamictitle`"
+date: "`r params$dynamicdate`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+suppressWarnings(suppressPackageStartupMessages(library(knitr)))
+suppressWarnings(suppressPackageStartupMessages(library(rmarkdown)))
+suppressWarnings(suppressPackageStartupMessages(library(markdown)))
+suppressWarnings(suppressPackageStartupMessages(library(DescTools)))
+```
+
+```{r echo=FALSE, cache = TRUE}
+load("C:/Users/Kuba/Documents/magisterka/dane/opis.RData")
+```
+
+# Statystyki opisowe
+
+```{r echo = FALSE}
+print(opis$opis)
+```
+
+# Histogram
+
+```{r echo=FALSE}
+plot(opis$df_histogram)
+```
+
+# Testy zgodnosci Kolmogorowa - Smirnova
+
+## Rozklad normalny
+
+```{r echo = FALSE }
+print(opis$test_ks_norm)
+```
+
+## Rozklad log - normalny
+
+```{r echo = FALSE}
+print(opis$test_ks_lognorm)
+```
+
+# Analiza zaleznosci ze zmienna **default**
+
+## Wykres pudelkowy
+
+```{r echo = FALSE}
+plot(opis$df_boxplot)
+```
+
+## Porownanie funkcji gestosci
+
+```{r echo = FALSE}
+plot(opis$df_density)
+```
+
+## Test srednich
+
+```{r echo = FALSE}
+print(opis$t_test)
+```
+
+## Analiza zaleznosci - regresja logistyczna i cubic splines
+
+```{r echo = FALSE}
+plot(opis$df_geom)
+```
+
+

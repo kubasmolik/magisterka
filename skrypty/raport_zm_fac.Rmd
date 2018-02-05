@@ -1,0 +1,52 @@
+---
+params:
+   dynamictitle: "Raport"
+   dynamicdate: !r Sys.Date()
+title: "`r params$dynamictitle`"
+date: "`r params$dynamicdate`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+suppressWarnings(suppressPackageStartupMessages(library(knitr)))
+suppressWarnings(suppressPackageStartupMessages(library(rmarkdown)))
+suppressWarnings(suppressPackageStartupMessages(library(markdown)))
+suppressWarnings(suppressPackageStartupMessages(library(DescTools)))
+```
+
+```{r echo=FALSE}
+load("C:/Users/Kuba/Documents/magisterka/dane/opis.RData")
+```
+
+# Statystyki opisowe
+
+```{r echo = FALSE}
+print(opis$opis)
+```
+
+# Rozklad kategorii
+
+```{r echo=FALSE}
+plot(opis$df_bar)
+```
+
+# Analiza zaleznosci ze zmienna **default**
+
+## Tabela
+
+```{r echo = FALSE}
+print(opis$tabela)
+```
+
+## Wykres
+
+```{r echo = FALSE}
+plot(opis$df_bar2)
+```
+
+## Test proporcji
+
+```{r echo = FALSE}
+print(opis$test)
+```

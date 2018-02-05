@@ -1,0 +1,71 @@
+---
+params:
+   dynamictitle: "Raport"
+   dynamicdate: !r Sys.Date()
+title: "`r params$dynamictitle`"
+date: "`r params$dynamicdate`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F)
+suppressWarnings(suppressPackageStartupMessages(library(knitr)))
+suppressWarnings(suppressPackageStartupMessages(library(rmarkdown)))
+suppressWarnings(suppressPackageStartupMessages(library(markdown)))
+suppressWarnings(suppressPackageStartupMessages(library(caret)))
+suppressWarnings(suppressPackageStartupMessages(library(gridExtra)))
+```
+
+```{r echo=FALSE, cache = FALSE}
+load("C:/Users/Kuba/Documents/magisterka/dane/raporty modeli/model.RData")
+```
+
+# Parametry modelu
+
+```{r echo = FALSE}
+print(train_eval$parametry)
+```
+
+# Dopasowanie modelu na zbiorze treningowym
+
+```{r echo = FALSE}
+kable(train_eval$metryki, format = "html", digits = 4)
+```
+
+# Dopasowanie modelu na zbiorze testowym
+
+## Podstawowe metryki
+
+```{r echo = FALSE}
+print(test_eval$ocena_1)
+```
+
+## Confusion Matrix
+
+```{r echo = FALSE}
+print(test_eval$ocena_2)
+```
+
+## Porownanie rozkladow prawdopodobienstwa
+
+```{r echo = FALSE}
+plot(test_eval$gestosc)
+```
+
+## Krzywa PR
+
+```{r echo = FALSE}
+plot(test_eval$krzywa_pr)
+```
+
+## Krzywa ROC
+
+```{r echo = FALSE}
+plot(test_eval$krzywa_roc)
+```
+
+# Ocena jakosci na podstawie prob bootstrapowych
+
+```{r echo = FALSE}
+plot(boot_eval$wykres_boot)
+```

@@ -1,0 +1,15 @@
+base
+dplyr
+lattice
+ggplot2
+caret
+knitr
+rmarkdown
+markdown
+shiny
+DescTools
+bindrcpp
+stringr
+stringi
+rebus
+tidytext
